@@ -18,15 +18,19 @@ class Sync extends Thread {
         for(int i=0; i<100; i++) {
             int randInt = rand.nextInt(100);
             this.nums.add(randInt);
+            System.out.println(nums.toString());
         }
-    }
+
+        }
 
     public static void main(String[] args)  {
         Sync syncThread = new Sync("sync thread");
         syncThread.start();
 
         System.out.println(syncThread.nums);
-        //this prints out an empty list. write some code that will allow the data generated in the syncThread to show up  here.  There is a brute force way and a more sophisticated way.  Either or will work, but strive for sophistication :)
+        //this prints out an empty list. write some code that will allow the data generated in
+        // the syncThread to show up  here.  There is a brute force way and a more sophisticated way.
+        // Either or will work, but strive for sophistication :)
 
     }
     
