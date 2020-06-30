@@ -16,7 +16,7 @@ class Sync extends Thread {
     public void run() {
         Random rand = new Random();
 
-        synchronized(this) {
+        synchronized(nums) {
             for (int i = 0; i < 100; i++) {
                 int randInt = rand.nextInt(100);
                 this.nums.add(randInt);
