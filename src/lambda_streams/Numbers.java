@@ -1,9 +1,10 @@
 package lambda_streams;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
+import java.math.BigInteger;
 
 class Numbers {
     static List<Integer> nums = Arrays.asList(10, 100, 1000, 5, 50, 500, 3, 30, 300, 7, 70, 700, 1, 10, 100, 25, 250, 2500);
@@ -14,7 +15,10 @@ class Numbers {
         // Use streams to compute the results whenever possible.
         System.out.println(nums);
 
-        //Part II - refactor all of the class methods to accept lambda expressions. You can put the lambda functions directly inside the method calls, or defined them first, then pass them into the methods. give them the same names as the static methods, but add the word 'lambda' in front of every lambda function:
+        //Part II - refactor all of the class methods to accept lambda expressions.
+        // You can put the lambda functions directly inside the method calls, or define them first,
+        // then pass them into the methods. give them the same names as the static methods, but add the word
+        // 'lambda' in front of every lambda function:
         /* e.g.
 
         added(() -> {});
@@ -51,46 +55,45 @@ class Numbers {
     }
 
     static boolean isPrime(int i) {
-        if(i % 2 == 0) {
+        if (i % 2 == 0) {
             return false;
-        } else if(i / i == 1) {
-                return true;
-            }
+        } else if (i / i == 1) {
+            return true;
+        }
         return false;
     }
 
-    static int added() {
-        int sum = IntStream.of(nums.size()).sum();
-        System.out.println("The sum is " + sum);
-        return sum;
-    }
-
-    static int subtracted(int i) {
-        Arrays.asList(nums, Collections.reverseOrder());
-        for (i = nums.size() - 1; i >= 0; i--){
-            System.out.println(i);
-        }
-            return i;
-        }
-
-    static int multipled() {
-        int sum=0;
-        for (int i=0; i<nums.size(); i++) {
-            sum = sum * nums.get(i);
+    static int added(List<Integer> nums) {
+        int sum = 0;
+        for (int i : nums) {
+            sum += i;
         }
         return sum;
     }
 
-    static int divided() {
+    static int subtracted(List<Integer> nums) {
         Arrays.asList(nums, Collections.reverseOrder());
-        int div=2500;
-        for (int i=1; i<nums.size(); i++) {
-            div = div / nums.get(i);
+        int sub = 2500;
+        for (int i : nums) {
+            sub -= i;
         }
+        return sub;
+    }
+
+    // got help on this from stack overflow, but because the number is so big I don't know if it is actually working.
+    static long[] multipled(List<Integer> nums) {
+        return new long[]{nums.size(),
+                nums.stream().mapToInt(Integer::intValue).sum(),
+                nums.stream().map(BigInteger::valueOf).reduce(BigInteger.ONE, BigInteger::multiply).longValue()};
+    }
+
+    static int divided(List<Integer> nums, int i, int j) {
+        int div = nums.get(j) / nums.get(i);
         return div;
     }
 
-    static int findMax() {
+
+    static int findMax(List<Integer> nums) {
         int i;
         int max = 0;
         for (i = 1; i < nums.size(); i++)
@@ -100,26 +103,26 @@ class Numbers {
         return max;
     }
 
-    static int findMin() {
-        int min = 0;
-        for(int i=1;i<nums.size();i++){
-            if(nums.get(i) < min){
+    static int findMin(List<Integer> nums) {
+        int min = 10;
+        for (int i = 1; i < nums.size(); i++) {
+            if (nums.get(i) < min) {
                 min = nums.get(i);
             }
         }
         return min;
     }
 
-    static int compare(int i, int j) {
+    static int compare(List<Integer> nums, int i, int j) {
         i = nums.get(i);
         j = nums.get(j);
-        if(i > j) {
+        if (i > j) {
             return 1;
-        } else if( j > i){
+        } else if (j > i) {
             return -1;
-        } else if(i == j){
+        } else if (i == j) {
             return 0;
-        } else{
+        } else {
             return i;
         }
         //compare the values stored in the array at index position i and j.  
@@ -128,10 +131,11 @@ class Numbers {
         // if the two values are equal, return 0.
     }
 
-    static int append(int n) {
-        nums.add(n);
-        //add a new value to the values list. return that value after adding it to the list.
-        return n;
+    static int append(List<Integer> nums, int i) {
+        nums = new ArrayList<Integer>();
+        //for (int i = 0; i < nums.size(); i++)
+        nums.add(i);
+        return (i);
     }
-
 }
+
