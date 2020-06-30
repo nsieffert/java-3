@@ -12,20 +12,27 @@ class Sync extends Thread {
         super(name);
     }
 
-    @Override
+    private volatile boolean active = false;
     public void run() {
-        Random rand = new Random();
-
-        synchronized(nums) {
-            for (int i = 0; i < 100; i++) {
-                int randInt = rand.nextInt(100);
-                this.nums.add(randInt);
-                System.out.println(Thread.currentThread().getName() + nums.toString());
+        active = true;
+        while (active) {
+            Random rand = new Random();
+            synchronized (nums) {
+                for (int i = 0; i < 100; i++) {
+                    int randInt = rand.nextInt(100);
+                    this.nums.add(randInt);
+                    System.out.println(Thread.currentThread().getName() + nums.toString());
+                    active = false;
+                }
             }
+
         }
 
     }
+
 }
+
+
     //public static void main(String[] args)  {
 //        Sync syncThread = new Sync("sync thread");
 //        syncThread.start();

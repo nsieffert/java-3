@@ -1,8 +1,13 @@
 package concurrency;
 
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class Main {
 
     public static void main(String[] args) {
+
         Reasoning reason = new Reasoning();
         reason.start();
         //run all of your threads from this main class.
@@ -12,7 +17,6 @@ public class Main {
         tc1Thread.start();
 
         //sync
-
         Sync syncThread = new Sync("sync thread");
         Sync syncThread1 = new Sync("sync thread1");
         Sync syncThread2 = new Sync("sync thread2");
