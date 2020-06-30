@@ -11,19 +11,17 @@ class Sync extends Thread {
     Sync(String name) {
         super(name);
     }
-    public List getNums() {
-    synchronized (nums) {
-        return nums;
-    }
-    }
+
     @Override
     public void run() {
         Random rand = new Random();
 
-        for (int i = 0; i < 100; i++) {
-            int randInt = rand.nextInt(100);
-            this.nums.add(randInt);
-            System.out.println(nums.toString() + Thread.currentThread().getName());
+        synchronized(this) {
+            for (int i = 0; i < 100; i++) {
+                int randInt = rand.nextInt(100);
+                this.nums.add(randInt);
+                System.out.println(Thread.currentThread().getName() + nums.toString());
+            }
         }
 
     }
