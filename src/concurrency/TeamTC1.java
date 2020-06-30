@@ -10,6 +10,12 @@ class TeamTC1 implements Runnable {
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_BRIGHT_RED = "\u001b[31;1m";
+    public static final String ANSI_BRIGHT_GREEN = "\u001b[32;1m";
+    public static final  String ANSI_BRIGHT_YELLOW = "\u001b[33;1m";
+    public static final String ANSI_BRIGHT_BLUE =  "\u001b[34;1m";
+    public static final String ANSI_BRIGHT_MAGENTA = "\u001b[35;1m";
+    public static final String ANSI_BRIGHT_CYAN =  "\u001b[36;1m";
     List<String> team = new ArrayList<>();
     private String name;
 
@@ -39,25 +45,25 @@ class TeamTC1 implements Runnable {
             System.out.println(ANSI_CYAN + "Matthew Castiglione" + ANSI_RESET + Thread.currentThread().getName());
             team.add("Matthew Castiglione");
             Thread.sleep(1000);
-            System.out.println(ANSI_RED + "Vani Muppuru" + ANSI_RESET + Thread.currentThread().getName());
+            System.out.println(ANSI_BRIGHT_RED + "Vani Muppuru" + ANSI_RESET + Thread.currentThread().getName());
             team.add("Vani Muppuru");
             Thread.sleep(1000);
-            System.out.println(ANSI_BLUE + "Kevin Ibanez" + ANSI_RESET + Thread.currentThread().getName());
+            System.out.println(ANSI_BRIGHT_BLUE + "Kevin Ibanez" + ANSI_RESET + Thread.currentThread().getName());
             team.add("Kevin Ibanez");
             Thread.sleep(1000);
-            System.out.println(ANSI_GREEN + "Nancy Golden" + ANSI_RESET + Thread.currentThread().getName());
+            System.out.println(ANSI_BRIGHT_GREEN + "Nancy Golden" + ANSI_RESET + Thread.currentThread().getName());
             team.add("Nancy Golden");
             Thread.sleep(1000);
-            System.out.println(ANSI_YELLOW + "Vimala Murthy" + ANSI_RESET + Thread.currentThread().getName());
+            System.out.println(ANSI_BRIGHT_YELLOW + "Vimala Murthy" + ANSI_RESET + Thread.currentThread().getName());
             team.add("Vimala Murthy");
             Thread.sleep(1000);
-            System.out.println(ANSI_RED + "John Kol" + ANSI_RESET + Thread.currentThread().getName());
+            System.out.println(ANSI_BRIGHT_CYAN + "John Kol" + ANSI_RESET + Thread.currentThread().getName());
             team.add("John Kol");
             Thread.sleep(1000);
-            System.out.println(ANSI_BLUE + "George Torres" + ANSI_RESET + Thread.currentThread().getName());
+            System.out.println(ANSI_BRIGHT_MAGENTA + "George Torres" + ANSI_RESET + Thread.currentThread().getName());
             team.add("George Torres");
             Thread.sleep(1000);
-            System.out.println(ANSI_PURPLE + "Norita Sieffert" + ANSI_RESET + Thread.currentThread().getName());
+            System.out.println(ANSI_RED + "Norita Sieffert" + ANSI_RESET + Thread.currentThread().getName());
             Thread.sleep(1000);
             System.out.println(team.toString());
         } catch (InterruptedException e) {
