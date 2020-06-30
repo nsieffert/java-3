@@ -25,13 +25,13 @@ public class Main {
         syncThread3.start();
         syncThread4.start();
 
-        try {
+        try{
             syncThread.join();
             syncThread1.join();
             syncThread2.join();
             syncThread3.join();
             syncThread4.join();
-        } catch(Exception e) {
+        } catch(InterruptedException e) {
             System.out.println(e);
         }
     }
