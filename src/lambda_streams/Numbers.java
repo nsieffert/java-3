@@ -1,10 +1,12 @@
 package lambda_streams;
 
+
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.math.BigInteger;
+import java.util.function.Predicate;
 
 class Numbers {
     static List<Integer> nums = Arrays.asList(10, 100, 1000, 5, 50, 500, 3, 30, 300, 7, 70, 700, 1, 10, 100, 25, 250, 2500);
@@ -40,102 +42,79 @@ class Numbers {
 
     }
 
-    static boolean isOdd(int i) {
-        if (i % 2 != 0) {
-            return true;
-        }
-        return false;
-    }
-
-    static boolean isEven(int i) {
-        if (i % 2 == 0) {
-            return true;
-        }
-        return false;
-    }
-
-    static boolean isPrime(int i) {
-        if (i % 2 == 0) {
-            return false;
-        } else if (i / i == 1) {
-            return true;
-        }
-        return false;
-    }
-
-    static int added(List<Integer> nums) {
+    Predicate<Integer> isOdd = (i) -> i % 2 != 0;
+    Predicate<Integer> isEven = (i) -> i % 2 == 0;
+    Predicate<Integer> isPrime = (i) -> i % 2 != 0 && i / i == 1;
+    oneFunction<List<Integer>> added = (List<Integer> nums) -> {
         int sum = 0;
         for (int i : nums) {
             sum += i;
         }
-        return sum;
-    }
-
-    static int subtracted(List<Integer> nums) {
+        return Collections.singletonList(sum);
+    };
+    oneFunction<List<Integer>> subtracted = (List<Integer> nums) -> {
         Arrays.asList(nums, Collections.reverseOrder());
         int sub = 2500;
         for (int i : nums) {
             sub -= i;
         }
-        return sub;
-    }
+        return Collections.singletonList(sub);
+    };
 
-    // got help on this from stack overflow, but because the number is so big I don't know if it is actually working.
-    static long[] multipled(List<Integer> nums) {
-        return new long[]{nums.size(),
-                nums.stream().mapToInt(Integer::intValue).sum(),
-                nums.stream().map(BigInteger::valueOf).reduce(BigInteger.ONE, BigInteger::multiply).longValue()};
-    }
+    oneFunction<BigInteger> multiplied = (n) -> {
+        BigInteger mult = new BigInteger("1");
+        for (int i : nums) {
+            mult = mult.multiply(BigInteger.valueOf(i));
+        }
+        return mult;
+    };
 
-    static int divided(List<Integer> nums, int i, int j) {
-        int div = nums.get(j) / nums.get(i);
-        return div;
-    }
+        twoFunction<Integer> divided = (k, j) -> {
+            int div = nums.get(j) / nums.get(k);
+            return div;
+        };
+        oneFunction<List<Integer>> findMax = (p) -> {
+            int b;
+            int max = 0;
+            for (b = 1; b < nums.size(); b++)
+                if (nums.get(b) > max) {
+                    max = nums.get(b);
+                }
+            return Collections.singletonList(max);
+        };
 
-
-    static int findMax(List<Integer> nums) {
-        int i;
-        int max = 0;
-        for (i = 1; i < nums.size(); i++)
-            if (nums.get(i) > max)
-                max = nums.get(i);
-
-        return max;
-    }
-
-    static int findMin(List<Integer> nums) {
-        int min = 10;
-        for (int i = 1; i < nums.size(); i++) {
-            if (nums.get(i) < min) {
-                min = nums.get(i);
+        oneFunction<List<Integer>> findMin = (d) -> {
+            int min = 10;
+            for (int c = 1; c < nums.size(); c++) {
+                if (nums.get(c) < min) {
+                    min = nums.get(c);
+                }
             }
-        }
-        return min;
-    }
+            return Collections.singletonList(min);
+        };
 
-    static int compare(List<Integer> nums, int i, int j) {
-        i = nums.get(i);
-        j = nums.get(j);
-        if (i > j) {
-            return 1;
-        } else if (j > i) {
-            return -1;
-        } else if (i == j) {
-            return 0;
-        } else {
-            return i;
-        }
-        //compare the values stored in the array at index position i and j.  
-        //if the value at i is greater, return 1.
-        // if the value at j is greater, return -1.
-        // if the two values are equal, return 0.
-    }
+        twoFunction<Integer> compare = (l, m) -> {
+            l = nums.get(l);
+            m = nums.get(m);
+            if (l > m) {
+                return 1;
+            } else if (m > l) {
+                return -1;
+            } else if (l == m) {
+                return 0;
+            } else {
+                return l;
+            }
+        };
 
-    static int append(List<Integer> nums, int i) {
-        nums = new ArrayList<Integer>();
-        //for (int i = 0; i < nums.size(); i++)
-        nums.add(i);
-        return (i);
-    }
-}
+        oneFunction<Integer> append = (a) -> {
+            List<Integer> nums1 = Arrays.asList(10, 100, 1000, 5, 50, 500, 3, 30, 300, 7, 70, 700, 1, 10, 100, 25, 250, 2500);
+            nums1 = new ArrayList<Integer>();
+            nums1.add(a);
+            return (a);
+        };
+    };
+
+
+
 
