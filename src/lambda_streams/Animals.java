@@ -1,103 +1,106 @@
 package lambda_streams;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 class Animals {
     //This class will be using streams.
-    static List<String> animals = Arrays.asList("peacoCK","rabbit","chiwawa","OranguTAN","vipeR","cobra","paNDa","bUffalo","DeeR","maLLard");
+    static List<String> animals = Arrays.asList("peacoCK", "rabbit", "chiwawa", "OranguTAN", "vipeR", "cobra", "paNDa", "bUffalo", "DeeR", "maLLard");
+    List<String> animaList = new ArrayList<>();
 
     public static void main(String[] args) {
         System.out.println("original animals : " + animals);
 
         //clean up the animals array by using the capsFirst() method. follow instructions in the method definition. 
-        List<String> cleaned = capsFirst(animals, false);
+        List<String> cleaned = capsFirst(animals, false); // no idea what this is
         System.out.println(cleaned);
 
         //do not modify these addAnimal() method invocations
-        addAnimal("rEIndeeR");
-        addAnimal("Platypus");
-        addAnimal("frOg");
-        addAnimal("lEOpArD");
+//        addAnimal("rEIndeeR");
+//        addAnimal("Platypus");
+//        addAnimal("frOg");
+//        addAnimal("lEOpArD");
         //---------------------------------------
 
 
-    //capsFirst(animals, true); - see main
-      //  return animals;
+        // capsFirst(animals, true);
+        //   return animals;
 
 
-        System.out.println(animals);
-        List<String> lowered = lowerFirst(animals,false);
-        System.out.println(lowered);
+//        System.out.println(animals);
+//        List<String> lowered = lowerFirst(animals,false);
+//        System.out.println(lowered);
     }
 
     static List<String> capsFirst(List<String> animaList, boolean mutate) {
-        Stream<String> stream = animals.stream();
-        animals.iterator().toString().toLowerCase();
-        stream.map(animal -> {
-            if(mutate == false) {
-                return animal;
+        if (mutate == false) {
+            return animals;
+        } else {
+            Supplier<Stream<String>> streamSupplier = () -> animals.stream();
+            Stream<String> lowerCaseStream = streamSupplier.get().map((String animal) -> {
+                return animal.toLowerCase();
+            });
+            Supplier<Stream<String>> upperCaseStream = () -> lowerCaseStream.map((String animal) -> {
+                return animal.substring(0, 1).toUpperCase() + animal.substring(1);
+            });
+
+            upperCaseStream.get().forEach((String animal) -> {
+                System.out.println("Caps first " + animal);
+            });
+
+            return animaList;
         }
-            return Character.toUpperCase(animal.charAt(0)) + animal.substring(1);
-        }).collect(Collectors.toList());
 
-        return animaList;
+//    static String addAnimal(String animal) {
+//        Supplier<Stream<String>> streamSupplier = () -> animals.stream();
+//        animals.add(animal);
+//        Collectors.toList();
+//        return animal;
+//    }
     }
-
-
-    static String addAnimal(String animal) {
-        Stream<String> stream = animals.stream();
-        animals.add(animal);
-        Collectors.toList();
-        return animal;
-    }
-
 
     static List<String> lowerFirst(List<String> animaList, boolean mutate) {
-        Stream<String> stream = animals.stream();
-        animals.iterator().toString().toUpperCase();
-        stream.map(animal -> {
-            if(mutate == false) {
-                return animals;
-            }
-            return Character.toLowerCase(animal.charAt(0)) + animal.substring(1);
-        }).collect(Collectors.toList());
+        if (mutate == false) {
+            return animals;
+        } else {
+            Supplier<Stream<String>> streamSupplier = () -> animals.stream();
+            Stream<String> upperCaseStream = streamSupplier.get().map((String animal) -> {
+                return animal.toUpperCase();
+            });
+            Supplier<Stream<String>> lowerCaseStream = () -> upperCaseStream.map((String animal) -> {
+                return animal.substring(0, 1).toLowerCase() + animal.substring(1);
+            });
 
-        return animaList;
+            lowerCaseStream.get().forEach((String animal) -> {
+                System.out.println("lowerFirst " + animal);
+            });
+
+            return animaList;
+        }
     }
-
 
     static List<String> flipAnimals(List<String> animaList, boolean mutate) {
-        Stream<String> stream = animals.stream();
-        if(mutate == false) {
+        if (mutate == false) {
             return animals;
         }
-        Collectors.collectingAndThen(Collectors.toList(), list -> {
-            Collections.reverse(animals);
-            return animals.stream();
+        Supplier<Stream<String>> streamSupplier = () -> animals.stream();
+        animals.stream().sorted(Collections.reverseOrder()).forEach((String animal) -> {
+            System.out.println("Flip animals " + animal);
         });
-
         return animaList;
     }
 
-//        List<String> instructions = Arrays.asList("Flip","the","animals","list","."," ",
-//        "Mutate","the","animals","only","if","flag","true");
-//        return instructions;
-//    };
+    static List<String> sortAnimals(List<String> sortedList, boolean mutate) {
+        if (mutate == false) {
+            return animals;
+        }
+        sortedList = animals.stream().sorted().collect(Collectors.toList());
+        sortedList.forEach(System.out::println);
+        return sortedList;
+    };
+}
 
-    static List<String> sortAnimals(List<String> animaList, boolean mutate) {
-        Stream<String> stream = animals.stream();
-        if(mutate == false) {
-        return animals;
-        }
-        Collectors.collectingAndThen(Collectors.toList(), list -> {
-        Collections.sort(animals);
-        return animals.stream();
-        });
-        return animaList;
-        }
-    }
+
 
