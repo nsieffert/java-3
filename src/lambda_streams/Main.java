@@ -26,23 +26,15 @@ public class Main {
         Animals animal = new Animals();
         System.out.println("original animals : " + animals.toString());
         System.out.println("+++++++++++++++++");
-        animal.capsFirst(animals, false);
+        animal.capsFirst.compute1(animals);
         System.out.println("+++++++++++++++++");
-        animal.capsFirst(animals, true);
+        animal.lowerFirst.compute1(animals);
         System.out.println("+++++++++++++++++");
-        animal.lowerFirst(animals,false);
+        animal.addAnimal.compute1(animals);
         System.out.println("+++++++++++++++++");
-        animal.lowerFirst(animals,true);
+        animal.flipAnimals.compute1(animals);
         System.out.println("+++++++++++++++++");
-        //System.out.println(animal.addAnimal("Coyote"));
-        System.out.println("+++++++++++++++++");
-        animal.flipAnimals(animals, true);
-        System.out.println("+++++++++++++++++");
-        animal.flipAnimals(animals, false);
-        System.out.println("+++++++++++++++++");
-        animal.sortAnimals(animals, true);
-        System.out.println("+++++++++++++++++");
-        animal.sortAnimals(animals, false);
+        animal.sortAnimals.compute1(animals);
         System.out.println("+++++++++++++++++");
     }
 }
