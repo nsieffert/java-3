@@ -22,16 +22,20 @@ Open the Numbers.java file.  This file contains a Numbers class that has the fol
 
 <h2>Exercise #2:</h2>
 
-Open the Animals.java file. This file contains an Animals class that has the following method signatures:
+Open the Animals.java file. This file contains an Animals class that 
+has the following method signatures:
+
 * capsFirst(List l, boolean b)
 * addAnimal(String animal)
 * lowerFirst(List l, boolean b)
 * flipAnimals(boolean b)
 * sortAnimals(boolean b)
 
-1. Complete all of the above methods, and test your methods by running all of them in the main() method of Names.  Display the output to the console.
+1. Complete all of the above methods, and test your methods by running all of them 
+in the main() method of Names.  Display the output to the console.
 
-2. Refactor the methods to accept lambda expressions as arguments.  Verify your code by printing the output of the methods to the console.
+2. Refactor the methods to accept lambda expressions as arguments.  
+Verify your code by printing the output of the methods to the console.
 
 <h2>Bonus: </h2>
 
